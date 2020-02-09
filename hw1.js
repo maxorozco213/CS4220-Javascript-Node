@@ -71,5 +71,75 @@ function convertToObject(gameArray) {
     return gameObj;
 }
 
-let gameObject = convertToObject(game_array);
-console.log("Question 6\n", gameObject);
+console.log("Question 6\n", convertToObject(game_array));
+console.log("\n-----------------------------------------------------------------\n");
+
+const products = [
+    [{
+        property: 'product',
+        assign: 'PS4'
+    },
+    {
+        property: 'company',
+        assign: 'Sony'
+    },
+    {
+        property: 'release',
+        assign: '2013'
+    }],
+
+    [{
+        property: 'product',
+        assign: 'Xbox One X'
+    }, {
+        property: 'company',
+        assign: 'Microsoft'
+    }, {
+        property: 'release',
+        assign: '2016'
+    }],
+    [{
+        property: 'product',
+        assign: 'Switch'
+    }, {
+        property: 'company',
+        assign: 'Nintendo'
+    }, {
+        property: 'release',
+        assign: '2017'
+    }]
+];
+
+function buildObject(productArr) {
+    let prodObj = {};
+    let innerObj = {};
+
+    for (let i = 0; i < productArr.length; i++) {
+        let objKey = i+1;
+        prodObj[objKey] = productArr[i];
+        // console.log("Object", prodObj);
+
+        for (let j = 0; j < 3; j++) {
+            let property = prodObj[objKey][j]['property'];
+
+            prodObj[property] = prodObj[objKey][j]['assign'];
+
+            // console.log(property);
+            // console.log(value);
+            console.log(prodObj)
+        }
+    }
+
+    // console.log("poo", prodObj);
+    // console.log(prodObj[1][0]['property']);
+    // console.log(prodObj[1][1]['property']);
+    // console.log(prodObj[1][2]['property']);
+    // console.log(prodObj[1][0]['assign']);
+    // console.log(prodObj[1][1]['assign']);
+    // console.log(prodObj[1][2]['assign']);
+
+    return prodObj;
+}
+
+buildObject(products);
+// console.log(buildObject(products));
