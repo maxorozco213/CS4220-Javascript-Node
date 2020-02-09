@@ -16,7 +16,8 @@ function countingLetters(quote, punctuation) {
 }
 
 let answer = countingLetters(quote, punctuations);
-console.log(answer);
+console.log("Question 4\n", answer);
+console.log("\n-----------------------------------------------------------------\n");
 
 function compareArray(arr1, arr2) {
     if (arr1.length !== arr2.length) {
@@ -50,4 +51,25 @@ const d1 = [1, 2, 3];
 const d2 = [3, 2, 1];
 results.push(compareArray(d1, d2));
 
-console.log(results);
+console.log("Question 5\n", results);
+console.log("\n-----------------------------------------------------------------\n");
+
+const game_array = [
+    [ 'developer', 'Respawn' ],
+    [ 'producer', 'EA' ],
+    [ 'game', 'Star Wars Jedi: Fallen Order' ],
+    [ 'year', 2019 ]
+];
+
+function convertToObject(gameArray) {
+    let gameObj = {};
+
+    gameArray.forEach((i) => {
+        gameObj[i[0]] = i[1];
+    });
+
+    return gameObj;
+}
+
+let gameObject = convertToObject(game_array);
+console.log("Question 6\n", gameObject);
