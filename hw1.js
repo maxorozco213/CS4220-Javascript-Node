@@ -1,3 +1,4 @@
+/* ------------------- Question 4 -------------------- */
 const quote = 'The greatest glory in living lies not in never falling, but in rising every time we fall.';
 const punctuations = [' ', ',', '.', '?', '!', ';', ':', '"', "'"];
 
@@ -19,6 +20,7 @@ let answer = countingLetters(quote, punctuations);
 console.log("Question 4\n", answer);
 console.log("\n-----------------------------------------------------------------\n");
 
+/* ------------------- Question 5 -------------------- */
 function compareArray(arr1, arr2) {
     if (arr1.length !== arr2.length) {
         return false
@@ -54,6 +56,7 @@ results.push(compareArray(d1, d2));
 console.log("Question 5\n", results);
 console.log("\n-----------------------------------------------------------------\n");
 
+/* ------------------- Question 6 -------------------- */
 const game_array = [
     [ 'developer', 'Respawn' ],
     [ 'producer', 'EA' ],
@@ -74,63 +77,28 @@ function convertToObject(gameArray) {
 console.log("Question 6\n", convertToObject(game_array));
 console.log("\n-----------------------------------------------------------------\n");
 
+/* ------------------- Question 7 -------------------- */
 const products = [
-    [{
-        property: 'product',
-        assign: 'PS4'
-    },
-    {
-        property: 'company',
-        assign: 'Sony'
-    },
-    {
-        property: 'release',
-        assign: '2013'
-    }],
-
-    [{
-        property: 'product',
-        assign: 'Xbox One X'
-    }, {
-        property: 'company',
-        assign: 'Microsoft'
-    }, {
-        property: 'release',
-        assign: '2016'
-    }],
-    [{
-        property: 'product',
-        assign: 'Switch'
-    }, {
-        property: 'company',
-        assign: 'Nintendo'
-    }, {
-        property: 'release',
-        assign: '2017'
-    }]
+    [{ property: 'product', assign: 'PS4' }, { property: 'company', assign: 'Sony' }, { property: 'release', assign: '2013' }],
+    [{ property: 'product', assign: 'Xbox One X' }, { property: 'company', assign: 'Microsoft' }, { property: 'release', assign: '2016' }],
+    [{ property: 'product', assign: 'Switch' }, { property: 'company', assign: 'Nintendo' }, { property: 'release', assign: '2017' }]
 ];
 
 function buildObject(productArr) {
     let prodObj = {};
-    let innerObj = {};
 
     for (let i = 0; i < productArr.length; i++) {
         let objKey = i+1;
-        prodObj[objKey] = productArr[i];
-        // console.log("Object", prodObj);
-
+        // Must have a new object to avoid overwriting any previous objects
+        let innerObj = {};
         for (let j = 0; j < 3; j++) {
-            let property = prodObj[objKey][j]['property'];
+            let property = productArr[i][j]['property'];
 
-            prodObj[property] = prodObj[objKey][j]['assign'];
-
-            // console.log(property);
-            // console.log(value);
-            console.log(prodObj)
+            innerObj[property] = productArr[i][j]['assign'];
+            prodObj[objKey] = innerObj;
         }
     }
 
-    // console.log("poo", prodObj);
     // console.log(prodObj[1][0]['property']);
     // console.log(prodObj[1][1]['property']);
     // console.log(prodObj[1][2]['property']);
@@ -141,5 +109,4 @@ function buildObject(productArr) {
     return prodObj;
 }
 
-buildObject(products);
-// console.log(buildObject(products));
+console.log("Question 7\n", buildObject(products));
