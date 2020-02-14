@@ -16,7 +16,7 @@ let heroObj = heroes.map(function(obj, index) {
 });
 
 console.log(
-    "Question 1\n\n",
+    "Answer 1\n\n",
     heroObj,
     "\n\n---------------------------------------------------------\n"
 );
@@ -43,7 +43,7 @@ function containsNintendo(obj, manu) {
 }
 
 console.log(
-    "Question 2\n\n",
+    "Answer 2\n\n",
     containsNintendo(consoles, manufacturer),
     "\n\n---------------------------------------------------------\n"
 );
@@ -71,7 +71,7 @@ let characterCount = marvel.reduce(function(count, obj) {
 }, initialValue);
 
 console.log(
-    "Question 3\n\n",
+    "Answer 3\n\n",
     `Total Villains Count: ${characterCount}`,
     "\n\n---------------------------------------------------------\n"
 );
@@ -87,23 +87,25 @@ const inventory = [
     { item: 'Sega Genesis', price: 104.0, stock: 0 }
 ];
 
-function iterateInventory(inv) {
-    inv.forEach(item => {
-        if (item.stock >= 3) {
-            item.status = "OK";
-        } else if (item.stock === 0) {
-            item.status = "OUT OF STOCK"
-        } else {
-            item.status = "LOW"
-        }
-    })
+function iterateInventory(inv, evalInv) {
+    inv.forEach(item => evalInv(item));
 
     return inv;
 }
 
+function evaluateInventory(item) {
+    if (item.stock >= 3) {
+        item.status = "OK";
+    } else if (item.stock === 0) {
+        item.status = "OUT OF STOCK"
+    } else {
+        item.status = "LOW"
+    }
+}
+
 console.log(
-    "Question 3\n\n",
-    iterateInventory(inventory),
+    "Answer 4\n\n",
+    iterateInventory(inventory, evaluateInventory),
     "\n\n---------------------------------------------------------\n"
 );
 
@@ -116,6 +118,7 @@ const sales = [
     { item: 'PS2 Console', stock: 1, original: 299.99, discount: 0.8 },
     { item: 'Nintendo 64', stock: 2, original: 199.99, discount: 0.65 }
 ];
+
 
 
 // EXPECTED OUTPUT (array of objects):
