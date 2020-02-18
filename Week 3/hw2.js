@@ -1,4 +1,6 @@
-// Question 1
+const divider = "\n---------------------------------------------------------\n";
+
+// -------------------------Question 1----------------------------------
 const heroes = [
       { name: 'Spider-Man' },
       { name: 'Thor' },
@@ -7,7 +9,7 @@ const heroes = [
       { name: 'Silver Surfer' }
   ];
 
-let heroObj = heroes.map(function(obj, index) {
+const heroObj = heroes.map(function(obj, index) {
   let newObj = {};
   newObj.id = index;
   newObj.hero = obj.name;
@@ -16,11 +18,13 @@ let heroObj = heroes.map(function(obj, index) {
 });
 
 console.log(
-    "Answer 1\n\n",
+    "Answer 1",
+    divider,
     heroObj,
-    "\n\n---------------------------------------------------------\n"
+    divider
 );
 
+// -------------------------Question 2----------------------------------
 const manufacturer = 'nintendo';
 const consoles = [
     { item: 'Sony PS4 Pro', price: 399.99 },
@@ -43,12 +47,13 @@ function containsNintendo(obj, manu) {
 }
 
 console.log(
-    "Answer 2\n\n",
+    "Answer 2",
+    divider,
     containsNintendo(consoles, manufacturer),
-    "\n\n---------------------------------------------------------\n"
+    divider
 );
 
-// Question 3
+// -------------------------Question 3----------------------------------
 const initialValue = 0;
 const marvel = [
     { name: 'Spider-Man', hero: true },
@@ -62,7 +67,7 @@ const marvel = [
     { name: 'Venom', hero: false }
 ];
 
-let characterCount = marvel.reduce(function(count, obj) {
+const characterCount = marvel.reduce(function(count, obj) {
     if (!obj.hero) {
         count = (count + 1 || 1);
     }
@@ -71,12 +76,13 @@ let characterCount = marvel.reduce(function(count, obj) {
 }, initialValue);
 
 console.log(
-    "Answer 3\n\n",
+    "Answer 3",
+    divider,
     `Total Villains Count: ${characterCount}`,
-    "\n\n---------------------------------------------------------\n"
+    divider
 );
 
-// Question 4
+// -------------------------Question 4----------------------------------
 const inventory = [
     { item: 'Sony PS4 Pro', price: 399.99, stock: 3 },
     { item: 'Atari', price: 125.0, stock: 0 },
@@ -104,9 +110,10 @@ function evaluateInventory(item) {
 }
 
 console.log(
-    "Answer 4\n\n",
+    "Answer 4",
+    divider,
     iterateInventory(inventory, evaluateInventory),
-    "\n\n---------------------------------------------------------\n"
+    divider
 );
 
 
@@ -119,46 +126,42 @@ const sales = [
     { item: 'Nintendo 64', stock: 2, original: 199.99, discount: 0.65 }
 ];
 
+function calculateSalesTotal(salesArr) {
+    const defaultDiscounts = {
+        item: 'None',
+        stock: 0,
+        original: 0,
+        discount: 0,
+    }
+
+    const adjustedPricesArr = []
+    
+    salesArr.forEach(saleItem => {
+        let totalSales = {}
+        let discountPrice;
+        totalSales = {...defaultDiscounts, ...saleItem}
+
+        if (totalSales.discount > 0) {
+
+            discountPrice = totalSales.original - (totalSales.original * totalSales.discount)
+            totalSales.total = discountPrice * totalSales.stock;
+            totalSales.sale = discountPrice;
+            adjustedPricesArr.push(totalSales);
+        } else {
+
+            totalSales.total = totalSales.original * totalSales.stock
+            totalSales.sale = totalSales.total;
+            adjustedPricesArr.push(totalSales);
+        }
+    });
+
+    return adjustedPricesArr;
+}
 
 
-// EXPECTED OUTPUT (array of objects):
-// [
-//     {
-//         item: 'PS4 Pro',
-//         stock: 3,
-//         original: 399.99,
-//         total: 1199.97,
-//         sale: 399.99
-//     },
-//     {
-//         item: 'Xbox One X',
-//         stock: 1,
-//         original: 499.99,
-//         discount: 0.1,
-//         total: 449.99100000000004,
-//         sale: 449.99100000000004
-//     },
-//     {
-//         item: 'Nintendo Switch',
-//         stock: 4,
-//         original: 299.99,
-//         total: 1199.96,
-//         sale: 299.99
-//     },
-//     {
-//         item: 'PS2 Console',
-//         stock: 1,
-//         original: 299.99,
-//         discount: 0.8,
-//         total: 59.99799999999999,
-//         sale: 59.99799999999999
-//     },
-//     {
-//         item: 'Nintendo 64',
-//         stock: 2,
-//         original: 199.99,
-//         discount: 0.65,
-//         total: 139.993,
-//         sale: 69.9965
-//     }
-// ]
+console.log(
+    "Answer 5",
+    divider,
+    calculateSalesTotal(sales),
+    divider
+);
