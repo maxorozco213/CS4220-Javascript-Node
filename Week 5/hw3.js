@@ -28,27 +28,36 @@ const websites = [
     }
 ];
 
-let responses = []
+let responses = [];
+let noResponse = [];
 
-checkWebsiteResponseTime = (website, callback) => {
-    setTimeout(function() {
-        responses.push(callback());
+function checkWebsiteResponseTime(website, callback) {
+    setTimeout(() => {
+        if (website.responseTime) {
+            callback(true);
+        } else {
+            callback(false);
+        }
     }, website.responseTime)
 }
 
-websiteResponseTime = (site) => {
-    for (let i = 0; i < site.length; i++) {
-        if (site[i].responseTime !== null) {
-            checkWebsiteResponseTime(site[i], () => {
-                console.log("obj", site[i])
-                return site[i];
-            })
-        } else if (site[i].responseTime === null) {
-            responses.push(site[i]);
-        }
-    }
+function websiteResponseTimes(websites) {
+    websites.forEach(site => {
+        checkWebsiteResponseTime(site, hasResponse => {
+            if (hasResponse) {
+                responses.push(site)
+                console.log(responses);
+            } else {
+                noResponse.push(site)
+                console.log(noResponse);
+            }
+        })
+    });
 }
 
-console.log("func", responses);
+websiteResponseTimes(websites);
+
+
+// https://stackoverflow.com/questions/22442321/callback-function-example#22442533
 
 // ------------------------- Question 2 ----------------------
