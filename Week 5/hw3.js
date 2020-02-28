@@ -31,25 +31,40 @@ const websites = [
 let responses = [];
 let noResponse = [];
 
+
 function checkWebsiteResponseTime(website, callback) {
     setTimeout(() => {
         if (website.responseTime) {
-            callback(true);
+            callback(true, website);
         } else {
-            callback(false);
+            callback(false, website);
         }
     }, website.responseTime)
 }
 
 function websiteResponseTimes(websites) {
+    let count = 0;
+
     websites.forEach(site => {
-        checkWebsiteResponseTime(site, hasResponse => {
+        checkWebsiteResponseTime(site, (hasResponse, resultSite) => {
             if (hasResponse) {
-                responses.push(site)
-                console.log(responses);
+                responses.push({
+                    site: resultSite.site,
+                    responseTime: resultSite.responseTime
+                })
             } else {
-                noResponse.push(site)
-                console.log(noResponse);
+                noResponse.push({
+                    site: resultSite.site,
+                    responseTime: resultSite.responseTime
+                })
+            }
+
+            count++;
+            console.log("count ", count);
+
+            if (count === websites.length) {
+                console.log("No response: ", noResponse)
+                console.log("Responses: ", responses);
             }
         })
     });
