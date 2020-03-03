@@ -33,7 +33,6 @@ const websites = [
 const responses = [];
 const noResponse = [];
 
-
 function checkWebsiteResponseTime(website, callback) {
     setTimeout(() => {
         if (website.responseTime) {
@@ -133,14 +132,45 @@ loopAccountPromises = (database) => {
     return finalObj;
 }
 
-const answer = loopAccountPromises(database);
+const promiseAnswer = loopAccountPromises(database);
 
 setTimeout(() => {
     console.log(
         "Answer 2",
         divider, 
-        answer,
+        promiseAnswer,
         divider
     )
-    // loopAccountPromises(database)
 }, 300)
+
+// ------------------------- Question 3 --------------------------
+
+loopAccountAsync = async function(database) {
+    const finalObj = {
+        found: [],
+        notFound: []
+    };
+
+    for (data in database) {
+        try {
+            const temp = await bucketTwitters(database[data])
+            finalObj.found.push(temp);
+        } catch (error) {
+            finalObj.notFound.push(error);
+        }
+    }
+
+    return finalObj;
+}
+
+let asyncAnswer;
+loopAccountAsync(database).then(answer => asyncAnswer = answer);
+
+setTimeout(() => {
+    console.log(
+        "Answer 3",
+        divider,
+        asyncAnswer,
+        divider
+    )
+}, 500)
